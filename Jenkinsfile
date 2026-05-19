@@ -3,7 +3,7 @@ pipeline {
  
     tools {
         // This matches the exact name configured in your Manage Jenkins -> Tools
-        sonarScanner 'sonar-scanner-tool'
+        sonarRunner 'sonar-scanner-tool'
     }
 
     environment {
