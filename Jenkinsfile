@@ -1,5 +1,9 @@
+
 pipeline {
     agent any
+       
+    tools {
+      sonarScanner 'sonar-scanner-tool' 
  
     environment {
         // Define your Harbor registry details
@@ -84,5 +88,47 @@ pipeline {
         failure {
             echo "Pipeline failed. Please check the logs."
         }
+    }
+} 
+GitHub - umapathy1729/backend-project
+Contribute to umapathy1729/backend-project development by creating an account on GitHub.
+
+GitHub
+pipeline {
+    agent any
+    
+    // 1. Define the tool here
+    tools {
+        // This name must exactly match the Name you gave inside Manage Jenkins -> Tools
+        sonarScanner 'sonar-scanner-tool' 
+    }
+
+    environment {
+        HARBOR_REGISTRY = '10.143.235.214'
+        HARBOR_PROJECT  = 'demo2'
+        IMAGE_NAME      = 'backend-service'
+        IMAGE_TAG       = "${BUILD_NUMBER}"
+        HARBOR_CREDS_ID = 'harbor-creds' 
+        SONAR_SERVER_ID = 'sonar-token1' 
+    }
+ 
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Pulling code from GitHub..."
+                git branch: 'main', url: 'https://github.com/umapathy1729/backend-project.git'
+            }
+        }
+ 
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv("${env.SONAR_SERVER_ID}") {
+                    // Jenkins will now automatically find the tool path
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+        
+        // ... (Keep the rest of your stages like Build, Push, Deploy exactly the same)
     }
 } 
