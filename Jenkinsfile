@@ -6,19 +6,19 @@ pipeline {
     stages {
         stage('Git checkout code') {
             steps {
-                git branch: 'Umapathy', 
+                git branch: 'main', 
                 credentialsId: 'Github-credentials', 
                 url: 'https://github.com/umapathy1729/backend-project.git'
             }
         }
         stage('Deploy to EC2') {
             steps {
-                sshagent(['ec2_key']) {
+                sshagent(['ec2_key2']) {
                     sh '''
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} '
                     set -e
                     rm -rf E-flow-Backend
-                    git clone git@github.com:cloudhostingky-alt/E-flow-Backend.git
+                    git clone git@github.com:umapathy1729/backend-project.git
 
                     cd E-flow-Backend
                     git checkout Umapathy
