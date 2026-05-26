@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        EC2_IP = "65.1.212.94"
+        EC2_IP = "52.66.164.235"
     }
     stages {
         stage('Git checkout code') {
@@ -17,12 +17,12 @@ pipeline {
                     sh '''
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} '
                     set -e
-                    rm -rf E-flow-Backend
+                    rm -rf backend-project
                     git clone git@github.com:umapathy1729/backend-project.git
 
-                    cd E-flow-Backend
-                    git checkout Umapathy
-                    git pull origin Umapathy
+                    cd backend-project
+                    git checkout main
+                    git pull origin main
 
                     docker stop backend_container || true
                     docker rm -rf backend_container || true
