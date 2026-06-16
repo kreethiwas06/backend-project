@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy to EC2') {
             steps {
-                sshagent(['kreethiwas06']) {
+                sshagent(['demo-key-ec2']) {
                     sh '''
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} '
                     set -e
