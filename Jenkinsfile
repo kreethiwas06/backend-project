@@ -1,19 +1,19 @@
 pipeline {
     agent any 
     environment {
-        EC2_IP = "32.198.174.174"
+        EC2_IP = "54.174.28.219"
     }
     stages {
         stage('Git checkout code') {
             steps {
                 git branch: 'main', 
-                credentialsId: 'awscred', 
+                credentialsId: 'aws cred', 
                 url: 'https://github.com/kreethiwas06/backend-project.git'
             }
         }
         stage('Deploy to EC2') {
             steps {
-                sshagent(['demo-key-ec2']) {
+                sshagent(['kreethiwas06']) {
                     sh '''
                     ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} '
                     set -e
