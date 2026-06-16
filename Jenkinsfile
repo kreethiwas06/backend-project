@@ -29,7 +29,7 @@ pipeline {
                     docker rmi backend_image || true
 
                     docker build -t backend_image .
-                    docker run -d -p 3009:5000 --name backend_container2 backend_image
+                    docker run -d -p 3009:5000 --name backend_container backend_image
 
                     '
                     '''
