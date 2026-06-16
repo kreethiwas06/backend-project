@@ -24,8 +24,8 @@ pipeline {
                     git checkout main
                     git pull origin main
 
-                    docker stop backend_container1 || true
-                    docker rm -rf backend_container1 || true
+                    docker stop backend_container2 || true
+                    docker rm -rf backend_container2 || true
                     docker rmi backend_image || true
 
                     docker build -t backend_image .
