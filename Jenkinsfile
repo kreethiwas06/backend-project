@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        EC2_IP = "52.66.164.235"
+        EC2_IP = "3.7.63.232"
     }
     stages {
         stage('Git checkout code') {
@@ -29,7 +29,7 @@ pipeline {
                     docker rmi backend_image || true
 
                     docker build -t backend_image .
-                    docker run -d -p 3000:3000 --name backend_container backend_image
+                    docker run -d -p 3009:3009 --name backend_container backend_image
 
                     '
                     '''
